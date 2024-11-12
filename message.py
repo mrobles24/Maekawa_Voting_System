@@ -1,4 +1,3 @@
-# message.py
 import json
 
 class Message(object):
