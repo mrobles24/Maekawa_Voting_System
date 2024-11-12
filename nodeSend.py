@@ -3,7 +3,7 @@ from threading import Thread
 import utils
 import config
 import json
-from copy import deepcopy  # <-- Importar deepcopy correctamente
+from copy import deepcopy 
 
 # ANSI color codes for better output visibility
 RESET = "\033[0m"
@@ -32,14 +32,14 @@ class NodeSend(Thread):
             self.node.lamport_ts += 1
             msg.set_ts(self.node.lamport_ts)
         assert dest == msg.dest
-        print(f"{GREEN}Sending message to Node {dest}: {msg.to_json()}{RESET}")  # Fix: Colors are now defined
+        print(f"{GREEN}Sending message to Node {dest}: {msg.to_json()}{RESET}") 
         self.client_sockets[dest].sendall(bytes(msg.to_json(), encoding='utf-8'))
 
     def multicast(self, msg, group):
         self.node.lamport_ts += 1
         msg.set_ts(self.node.lamport_ts)
         for dest in group:
-            new_msg = deepcopy(msg)  # Usamos deepcopy correctamente
+            new_msg = deepcopy(msg) 
             new_msg.set_dest(dest)
             assert new_msg.dest == dest
             assert new_msg.ts == msg.ts
