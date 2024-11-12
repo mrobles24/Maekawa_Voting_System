@@ -1,4 +1,3 @@
-# utils.py
 import socket
 
 def create_server_socket(port):
