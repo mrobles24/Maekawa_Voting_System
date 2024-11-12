@@ -1,4 +1,3 @@
-# main.py
 import time
 from maekawaMutex import MaekawaMutex
 from threading import Thread
