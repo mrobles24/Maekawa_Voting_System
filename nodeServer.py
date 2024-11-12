@@ -1,4 +1,3 @@
-# nodeServer.py
 import select
 from threading import Thread
 import utils
@@ -42,14 +41,12 @@ class NodeServer(Thread):
                         print(f"{GREEN}Node {self.node.id} accepted connection from {addr}{RESET}")
                     else:
                         try:
-                            # Recibir datos del socket
                             msg_stream = read_socket.recv(4096)
-                            if msg_stream:  # Verificar que msg_stream no esté vacío
+                            if msg_stream:
                                 msg = msg_stream.decode('utf-8')
                                 ms = json.loads(msg)
                                 self.process_message(ms)
                             else:
-                                # Si el socket no envía datos, se cierra y elimina
                                 print(f"{RED}Connection closed by peer at {read_socket.getpeername()}{RESET}")
                                 read_socket.close()
                                 self.connection_list.remove(read_socket)
@@ -61,7 +58,6 @@ class NodeServer(Thread):
         self.server_socket.close()
 
     def process_message(self, msg):
-        """ Procesa los mensajes recibidos """
         try:
             print(f"{BLUE}Node_{self.node.id} received msg: {msg}{RESET}")
         except Exception as e:
